@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Please sign in</title>
+  </head>
+  <body>
+     <div>
+      <form #loginform = "ngForm" (ngSubmit) = "loginUser()">
+        <h2>Please sign in</h2>
+        <p>
+          <label>Username</label>
+          <input type="text" name="nickname" placeholder="Nickname" [(ngModel)] = "user.nickname">
+        </p>
+        <p>
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Password" [(ngModel)] = "user.password">
+        </p>
+        <button type="submit">Sign in</button>
+      </form>
+</div>
+</body>
+</html>
