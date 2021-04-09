@@ -5,15 +5,15 @@
   </head>
   <body>
      <div>
-      <form #loginform = "ngForm" (ngSubmit) = "loginUser()">
+      <form #loginUserForm = "ngForm" (ngSubmit) = "loginUser(loginUserForm)">
         <h2>Please sign in</h2>
         <p>
-          <label>Username</label>
-          <input type="text" name="nickname" placeholder="Nickname" [(ngModel)] = "user.nickname">
+          <label>Nickname</label>
+          <input type="text" name="nickname" placeholder="Nickname" ngModel>
         </p>
         <p>
           <label>Password</label>
-          <input type="password" name="password" placeholder="Password" [(ngModel)] = "user.password">
+          <input type="password" name="password" placeholder="Password" ngModel>
         </p>
         <button type="submit">Sign in</button>
       </form>

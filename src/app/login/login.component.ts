@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { JwtClientService } from '../jwt-client.service';
 import { LoginService } from '../login.service';
 import { User } from '../user';
+import { AuthRequest } from '../authRequest';
 
 @Component({
   selector: 'app-login',
@@ -10,19 +12,12 @@ import { User } from '../user';
 })
 export class LoginComponent implements OnInit {
 
-  //user = new User();
-  public user = {} as User;
-
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private jwtClientService: JwtClientService) { }
 
   ngOnInit(): void {
   }
 
-  loginUser(){
-    this.loginService.loginUserFromRemote(this.user).subscribe(
-      data => console.log("response recieved"),
-      error => console.log("exception occured")
-      
-    )
+  public loginUser(loginUserForm: NgForm): void{
+    this.jwtClientService.getAccessToken(loginUserForm.value)
   }
 }

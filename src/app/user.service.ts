@@ -12,8 +12,8 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  public getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiServerUrl}/user`);
+  public getUsers(headers): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiServerUrl}/user`, {headers, responseType: 'text' as 'json' });
   }
 
   public addUsers(user: User): Observable<User> {

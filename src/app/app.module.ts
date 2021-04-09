@@ -10,13 +10,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
 import { PostComponent } from './post/post.component';
+import { SecurityComponent } from './security/security.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { AddPostComponent } from './add-post/add-post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     UserComponent,
-    PostComponent
+    PostComponent,
+    SecurityComponent,
+    RegistrationComponent,
+    AddPostComponent
   ],
   imports: [
     BrowserModule,

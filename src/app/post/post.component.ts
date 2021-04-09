@@ -1,6 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { JwtClientService } from '../jwt-client.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
 
@@ -12,27 +15,20 @@ import { PostService } from '../post.service';
 export class PostComponent implements OnInit {
 
   public post!: Post;
-  public posts: Post[] = [];
+  public id!: number;
+  private subscription: Subscription;
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, 
+              private jwtClientService: JwtClientService,
+              private activateRoute: ActivatedRoute) {
+                this.subscription = activateRoute.params.subscribe(data => this.id = data['id'])
+               }
 
   ngOnInit(): void {
-    this.getPosts();
+    this.getPostById();
   }
 
-  public getPosts(): void {
-    this.postService.getPosts().subscribe((response: Post[]) => {this.posts = response;},
-      (error: HttpErrorResponse) => {alert(error.message);}
-    );
+  public getPostById(): void {
+    this.postService.getPostById(this.id, this.jwtClientService.getHeaders()).subscribe((data: string) => {this.post = JSON.parse(data);})
   }
-
-  public onAddPost(addPostForm: NgForm): void{
-    this.postService.addPost(addPostForm.value).subscribe(
-      (response: Post) => {
-        console.log(response);
-        this.getPosts();
-      }
-    )
-  }
-
 }

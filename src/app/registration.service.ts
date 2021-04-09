@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -7,14 +7,14 @@ import { User } from './user';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class RegistrationService {
 
   private apiServerUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) { }
 
-  // public loginUserFromRemote(user: User): Observable<any>{
-  //   console.log(user);
-  //   return  this.http.post(`${this.apiServerUrl}/login`, user)
-  // }
+  public addUser(user: User): Observable<User> {
+    return this.http.post<User>(
+      `${this.apiServerUrl}/user/add`, user);
+  }
 }

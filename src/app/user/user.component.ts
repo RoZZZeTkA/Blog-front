@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { JwtClientService } from '../jwt-client.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
 
@@ -10,16 +11,16 @@ import { UserService } from '../user.service';
 })
 export class UserComponent implements OnInit {
 
-  public users: User[] = [];
+  public users!: User[];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private jwtClientService: JwtClientService) { }
 
   ngOnInit(): void {
     this.getUsers();
   }
 
   public getUsers(): void {
-    this.userService.getUsers().subscribe((response: User[]) => {this.users = response;},
+    this.userService.getUsers(this.jwtClientService.getHeaders()).subscribe((data: User[]) => {this.users = JSON.parse(data.toString());},
       (error: HttpErrorResponse) => {alert(error.message);}
     );
   }

@@ -13,15 +13,16 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  public getPostById(postId: number): Observable<Post> {
-    return this.http.get<Post>(`${this.apiServerUrl}/post/find/${postId}`);
+  public getPostById(postId: number, headers): Observable<string> {
+    return this.http.get<string>(`${this.apiServerUrl}/post/find/${postId}`, {headers, responseType: 'text' as 'json' });
   }
 
-  public getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.apiServerUrl}/post`);
+  public getPosts(headers): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.apiServerUrl}/post`, {headers, responseType: 'text' as 'json' });
   }
 
-  public addPost(post: Post): Observable<Post> {
-    return this.http.post<Post>(`${this.apiServerUrl}/post/add`, post);
+  public addPost(post: Post, headers): Observable<Post> {
+    return this.http.post<Post>(
+      `${this.apiServerUrl}/post/add`, post, {headers, responseType: 'text' as 'json' });
   }
 }
