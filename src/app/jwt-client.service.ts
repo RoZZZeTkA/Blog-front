@@ -13,6 +13,7 @@ export class JwtClientService {
   constructor(private http: HttpClient) { }
 
   public generateToken(request){
+    console.log(this.apiServerUrl);
     let token = this.http.post(`${this.apiServerUrl}/auth`, request, {responseType: 'text' as 'json'});
     return token;
   }
