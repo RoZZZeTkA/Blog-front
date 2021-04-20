@@ -13,6 +13,9 @@ import { PostComponent } from './post/post.component';
 import { SecurityComponent } from './security/security.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AddPostComponent } from './add-post/add-post.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminUserComponent } from './admin-user/admin-user.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { AddPostComponent } from './add-post/add-post.component';
     PostComponent,
     SecurityComponent,
     RegistrationComponent,
-    AddPostComponent
+    AddPostComponent,
+    AdminComponent,
+    AdminUserComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

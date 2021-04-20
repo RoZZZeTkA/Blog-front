@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { JwtClientService } from '../jwt-client.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
+import { StorageService } from '../storage.service';
 
 @Component({
   selector: 'app-add-post',
@@ -14,8 +15,9 @@ export class AddPostComponent implements OnInit {
 
   public post!: Post;
   public posts!: Post[];
+  public files!: FileList;
 
-  constructor(private postService: PostService, private jwtClientService: JwtClientService) { }
+  constructor(private postService: PostService, private storageService: StorageService, private jwtClientService: JwtClientService) { }
 
   ngOnInit(): void {
     this.getPosts();
@@ -33,6 +35,20 @@ export class AddPostComponent implements OnInit {
         this.getPosts();
       }
     )
+    if(this.files != undefined){
+      for(let i = 0; i < this.files.length; i++){
+        console.log(this.files[i].name);
+        let formData = new FormData();
+        formData.append('file', this.files[i], this.files[i].name);
+        formData.append('title', (<HTMLInputElement>document.getElementById('title')).value);
+        this.storageService.uploadFile(formData, this.jwtClientService.getHeaders()).subscribe(
+          (data: String) => {console.log(data);}
+        )
+      }
+    }
   }
 
+  public onAddFiles(event) {
+    this.files = event.target.files;
+  }
 }

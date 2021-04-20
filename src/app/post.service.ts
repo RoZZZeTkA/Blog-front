@@ -17,6 +17,10 @@ export class PostService {
     return this.http.get<string>(`${this.apiServerUrl}/post/find/${postId}`, {headers, responseType: 'text' as 'json' });
   }
 
+  public getPostsByUserId(userId: number, headers): Observable<Post[]>{
+    return this.http.get<Post[]>(`${this.apiServerUrl}/post/user/${userId}`, {headers, responseType: 'text' as 'json' });
+  }
+
   public getPosts(headers): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.apiServerUrl}/post`, {headers, responseType: 'text' as 'json' });
   }
@@ -24,5 +28,10 @@ export class PostService {
   public addPost(post: Post, headers): Observable<Post> {
     return this.http.post<Post>(
       `${this.apiServerUrl}/post/add`, post, {headers, responseType: 'text' as 'json' });
+  }
+
+  public deletePost(postId: number, headers): Observable<void>{
+    return this.http.delete<void>(
+      `${this.apiServerUrl}/post/delete/${postId}`, {headers, responseType: 'text' as 'json' });
   }
 }

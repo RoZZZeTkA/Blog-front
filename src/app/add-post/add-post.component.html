@@ -3,16 +3,17 @@
 </div>
 <form #addPostForm = "ngForm" (ngSubmit) = "onAddPost(addPostForm)">
     <p>
-        <label>User Id</label>
-        <input type="text" name="userId" placeholder="User Id" ngModel>
-    </p>
-    <p>
         <label>Title</label>
-        <input type="text" name="title" placeholder="Title" ngModel>
+        <input type="text" id="title" name="title" placeholder="Title" ngModel>
     </p>
     <p>
         <label>Value</label>
         <input type="text" name="value" placeholder="Value" ngModel>
     </p>
+    <p>
+        <label>File</label>
+        <input type="file" name="file" (change) = "onAddFiles($event)" multiple>
+    </p>
     <button type="submit">Add post</button>
+    <!-- <button (click) = onAddFiles()>Upload</button> -->
 </form>
