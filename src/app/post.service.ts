@@ -25,9 +25,9 @@ export class PostService {
     return this.http.get<Post[]>(`${this.apiServerUrl}/post`, {headers, responseType: 'text' as 'json' });
   }
 
-  public addPost(post: Post, headers): Observable<Post> {
+  public addPost(post: Post, tags: String, headers): Observable<Post> {
     return this.http.post<Post>(
-      `${this.apiServerUrl}/post/add`, post, {headers, responseType: 'text' as 'json' });
+      `${this.apiServerUrl}/post/add/${tags}`, post, {headers, responseType: 'text' as 'json' });
   }
 
   public deletePost(postId: number, headers): Observable<void>{

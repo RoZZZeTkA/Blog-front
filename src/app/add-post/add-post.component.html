@@ -1,6 +1,3 @@
-<div *ngFor="let post of posts">
-    {{post.title}}
-</div>
 <form #addPostForm = "ngForm" (ngSubmit) = "onAddPost(addPostForm)">
     <p>
         <label>Title</label>
@@ -11,9 +8,12 @@
         <input type="text" name="value" placeholder="Value" ngModel>
     </p>
     <p>
+        <label>Tags</label>
+        <input type="text" id="tags" name="tags" placeholder="Tags">
+    </p>
+    <p>
         <label>File</label>
         <input type="file" name="file" (change) = "onAddFiles($event)" multiple>
     </p>
     <button type="submit">Add post</button>
-    <!-- <button (click) = onAddFiles()>Upload</button> -->
 </form>

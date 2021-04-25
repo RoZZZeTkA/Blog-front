@@ -1,10 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, NgForm, NgModel, Validators } from '@angular/forms';
 import { JwtClientService } from '../jwt-client.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
 import { StorageService } from '../storage.service';
+import { Tag } from '../tag';
+import { TagService } from '../tag.service';
 
 @Component({
   selector: 'app-add-post',
@@ -13,39 +15,48 @@ import { StorageService } from '../storage.service';
 })
 export class AddPostComponent implements OnInit {
 
-  public post!: Post;
-  public posts!: Post[];
   public files!: FileList;
 
-  constructor(private postService: PostService, private storageService: StorageService, private jwtClientService: JwtClientService) { }
+  constructor(private postService: PostService, 
+              private storageService: StorageService, 
+              private tagService: TagService, 
+              private jwtClientService: JwtClientService) { }
 
   ngOnInit(): void {
-    this.getPosts();
-  }
-
-  public getPosts(): void {
-    this.postService.getPosts(this.jwtClientService.getHeaders()).subscribe((data: Post[]) => {this.posts = JSON.parse(data.toString());},
-      (error: HttpErrorResponse) => {alert(error.message);}
-    );
   }
 
   public onAddPost(addPostForm: NgForm): void{
-    this.postService.addPost(addPostForm.value, this.jwtClientService.getHeaders()).subscribe(
-      (data: Post) => {
-        this.getPosts();
+    let tags = (<HTMLInputElement>document.getElementById('tags')).value;
+    this.postService.addPost(addPostForm.value, tags, this.jwtClientService.getHeaders()).subscribe(
+      () => {
+        let title = (<HTMLInputElement>document.getElementById('title')).value;
+        
+        if(this.files != undefined){
+          
+          for(let i = 0; i < this.files.length; i++){
+            let formData = new FormData();
+            formData.append('file', this.files[i], this.files[i].name);
+            formData.append('title', title);
+            this.storageService.uploadFile(formData, this.jwtClientService.getHeaders()).subscribe(
+              (data: String) => {console.log(data);}
+            )
+          }
+        }
+
+        // let tags = (<HTMLInputElement>document.getElementById('tags')).value.split(", ");
+        // if(!(tags[0] == "")){
+        //   for(let i = 0; i < tags.length; i++){
+        //     console.log(tags[i]);
+        //     let formData = new FormData();
+        //     formData.append('tag', tags[i]);
+        //     formData.append('title', title);
+        //     this.tagService.addTag(formData, this.jwtClientService.getHeaders()).subscribe(
+        //       (data: Tag) => {console.log(data);}
+        //     )
+        //   }
+        // }
       }
-    )
-    if(this.files != undefined){
-      for(let i = 0; i < this.files.length; i++){
-        console.log(this.files[i].name);
-        let formData = new FormData();
-        formData.append('file', this.files[i], this.files[i].name);
-        formData.append('title', (<HTMLInputElement>document.getElementById('title')).value);
-        this.storageService.uploadFile(formData, this.jwtClientService.getHeaders()).subscribe(
-          (data: String) => {console.log(data);}
-        )
-      }
-    }
+    );
   }
 
   public onAddFiles(event) {

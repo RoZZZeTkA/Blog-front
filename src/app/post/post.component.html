@@ -1,4 +1,5 @@
 <h1>{{post.title}}</h1>
+<h2 *ngFor="let tag of post.postTags">{{tag.value}}</h2>
 {{post.value}}
 <p><a href = {{url}}{{post.userId}}>Author</a></p>
 <img *ngFor="let link of urls" src="{{link.url}}" class="">
