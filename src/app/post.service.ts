@@ -21,6 +21,10 @@ export class PostService {
     return this.http.get<Post[]>(`${this.apiServerUrl}/post/user/${userId}`, {headers, responseType: 'text' as 'json' });
   }
 
+  public getPostsByTag(tag: String, headers): Observable<Post[]>{
+    return this.http.get<Post[]>(`${this.apiServerUrl}/search?t=${tag}`, {headers, responseType: 'text' as 'json' })
+  }
+
   public getPosts(headers): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.apiServerUrl}/post`, {headers, responseType: 'text' as 'json' });
   }

@@ -7,7 +7,7 @@ import { PostService } from './post.service';
 import { UserService } from './user.service';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
 import { PostComponent } from './post/post.component';
 import { SecurityComponent } from './security/security.component';
@@ -16,6 +16,7 @@ import { AddPostComponent } from './add-post/add-post.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { HomeComponent } from './home/home.component';
+import { SearhResultsComponent } from './searh-results/searh-results.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HomeComponent } from './home/home.component';
     AddPostComponent,
     AdminComponent,
     AdminUserComponent,
-    HomeComponent
+    HomeComponent,
+    SearhResultsComponent
   ],
   imports: [
     BrowserModule,

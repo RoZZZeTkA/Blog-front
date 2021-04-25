@@ -6,7 +6,6 @@ import { Post } from '../post';
 import { PostService } from '../post.service';
 import { StorageService } from '../storage.service';
 import { Tag } from '../tag';
-import { TagService } from '../tag.service';
 
 @Component({
   selector: 'app-add-post',
@@ -19,7 +18,6 @@ export class AddPostComponent implements OnInit {
 
   constructor(private postService: PostService, 
               private storageService: StorageService, 
-              private tagService: TagService, 
               private jwtClientService: JwtClientService) { }
 
   ngOnInit(): void {

@@ -1,5 +1,8 @@
 <h1>{{post.title}}</h1>
-<h2 *ngFor="let tag of post.postTags">{{tag.value}}</h2>
+<div *ngFor="let tag of post.postTags">
+    <a href={{searchUrl}}{{tag.value}}>{{tag.value}}</a>
+    <!-- <a (click) = "tagOnClick()">{{tag.value}}</a> -->
+</div>
 {{post.value}}
-<p><a href = {{url}}{{post.userId}}>Author</a></p>
+<p><a href = {{userUrl}}{{post.userId}}>Author</a></p>
 <img *ngFor="let link of urls" src="{{link.url}}" class="">

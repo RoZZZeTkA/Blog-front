@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { JwtClientService } from '../jwt-client.service';
@@ -20,7 +20,8 @@ export class PostComponent implements OnInit {
   public urls;
   public id!: number;
   private subscription: Subscription;
-  public url: String = environment.frontUrl + "/user/";
+  public userUrl: String = environment.frontUrl + "/user/";
+  public searchUrl: String = environment.frontUrl + "/search?t=";
 
 
   constructor(private postService: PostService,
@@ -36,8 +37,12 @@ export class PostComponent implements OnInit {
 
   public getPostById(): void {
     this.postService.getPostById(this.id, this.jwtClientService.getHeaders())
-    .subscribe((data: string) => {this.post = JSON.parse(data);})
+    .subscribe((data: string) => {this.post = JSON.parse(data); console.log(this.post);})
     this.storageService.getUrlsByPostId(this.id, this.jwtClientService.getHeaders())
     .subscribe((data) => {this.urls = JSON.parse(data.toString());})
   }
+
+  // public tagOnClick(): void{
+  //   this.router.navigate(['/search'], {queryParams: {t: 'qqq'}});
+  // }
 }
