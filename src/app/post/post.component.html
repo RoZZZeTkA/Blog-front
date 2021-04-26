@@ -1,8 +1,12 @@
 <h1>{{post.title}}</h1>
 <div *ngFor="let tag of post.postTags">
     <a href={{searchUrl}}{{tag.value}}>{{tag.value}}</a>
-    <!-- <a (click) = "tagOnClick()">{{tag.value}}</a> -->
 </div>
 {{post.value}}
 <p><a href = {{userUrl}}{{post.userId}}>Author</a></p>
-<img *ngFor="let link of urls" src="{{link.url}}" class="">
+<img *ngFor="let link of page" src="{{link.url}}" (click) = "openImage(link.url)" class="mini-image">
+<p><button (click) = "prev()">prev</button>
+    <button (click) = "next()">next</button></p>
+<div *ngIf = "showOverlay" (click) = "hideOverlay()" class="overlay">
+    <img [src]="openImageSrc" class="open-image">
+</div>

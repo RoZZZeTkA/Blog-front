@@ -1,0 +1,32 @@
+input[type="text"] {
+    border: 0px;
+    background: #ffffff;
+    outline: none;
+    height: 24px;
+    width: 1300px;
+    color: #000000;
+    font-size: 14px;
+ }
+
+textarea {
+    border: 0px;
+    background: #ffffff;
+    outline: none;
+    height: 300px;
+    width: 1300px;
+    color: #000000;
+    font-size: 14px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+ }
+
+ button {
+    background-color: #65a3be;
+    border: none;
+    color: white;
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}

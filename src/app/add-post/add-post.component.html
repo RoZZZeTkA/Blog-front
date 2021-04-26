@@ -1,18 +1,16 @@
+
 <form #addPostForm = "ngForm" (ngSubmit) = "onAddPost(addPostForm)">
     <p>
-        <label>Title</label>
         <input type="text" id="title" name="title" placeholder="Title" ngModel>
     </p>
     <p>
-        <label>Value</label>
-        <input type="text" name="value" placeholder="Value" ngModel>
+        <textarea type="text" name="value" placeholder="Value" ngModel></textarea>
+        <!-- <input type="text" name="value" placeholder="Value" ngModel> -->
     </p>
     <p>
-        <label>Tags</label>
         <input type="text" id="tags" name="tags" placeholder="Tags">
     </p>
     <p>
-        <label>File</label>
         <input type="file" name="file" (change) = "onAddFiles($event)" multiple>
     </p>
     <button type="submit">Add post</button>

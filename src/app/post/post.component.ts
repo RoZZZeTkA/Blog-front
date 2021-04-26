@@ -22,6 +22,11 @@ export class PostComponent implements OnInit {
   private subscription: Subscription;
   public userUrl: String = environment.frontUrl + "/user/";
   public searchUrl: String = environment.frontUrl + "/search?t=";
+  public page;
+  public numberOfElements: number = 3;
+  public currentFirstElement: number = 0;
+  public showOverlay: boolean = false;
+  public openImageSrc;
 
 
   constructor(private postService: PostService,
@@ -39,10 +44,34 @@ export class PostComponent implements OnInit {
     this.postService.getPostById(this.id, this.jwtClientService.getHeaders())
     .subscribe((data: string) => {this.post = JSON.parse(data); console.log(this.post);})
     this.storageService.getUrlsByPostId(this.id, this.jwtClientService.getHeaders())
-    .subscribe((data) => {this.urls = JSON.parse(data.toString());})
+    .subscribe((data) => {this.urls = JSON.parse(data.toString()); this.page = this.urls.slice(0, this.numberOfElements);})
   }
 
-  // public tagOnClick(): void{
-  //   this.router.navigate(['/search'], {queryParams: {t: 'qqq'}});
-  // }
+  public prev(): void{
+    if(this.currentFirstElement > 0){
+      this.currentFirstElement -= this.numberOfElements;
+      this.changePage();
+    }
+  }
+
+  public next(): void{
+    if(this.currentFirstElement < this.urls.length - this.numberOfElements){
+      this.currentFirstElement += this.numberOfElements;
+      this.changePage();
+    }
+  }
+
+  public changePage(): void{
+    this.page = this.urls.slice(this.currentFirstElement, this.currentFirstElement + this.numberOfElements);
+  }
+
+  public openImage(url): void{
+    console.log(url);
+    this.showOverlay = true;
+    this.openImageSrc = url;
+  }
+
+  public hideOverlay(): void{
+    this.showOverlay = false;
+  }
 }
