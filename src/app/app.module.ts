@@ -17,6 +17,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { HomeComponent } from './home/home.component';
 import { SearhResultsComponent } from './searh-results/searh-results.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SearhResultsComponent } from './searh-results/searh-results.component';
     AdminComponent,
     AdminUserComponent,
     HomeComponent,
-    SearhResultsComponent
+    SearhResultsComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

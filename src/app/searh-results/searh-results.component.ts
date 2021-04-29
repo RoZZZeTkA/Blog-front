@@ -12,8 +12,7 @@ import { PostService } from '../post.service';
 })
 export class SearhResultsComponent implements OnInit {
 
-  posts!: Post[];
-  public url: String = environment.frontUrl + "/post/";
+  public posts: Post[] = [];
 
   constructor(private postService: PostService, 
               private router: Router,

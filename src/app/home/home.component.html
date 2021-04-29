@@ -1,6 +1,1 @@
-<p>Posts</p>
-<div *ngFor="let post of page">
-    <a href = {{url}}{{post.id}}>{{post.title}}</a>
-</div>
-<p><button (click) = "prev()">prev</button>
-<button (click) = "next()">next</button></p>
+<app-pagination [posts] = "posts"></app-pagination>

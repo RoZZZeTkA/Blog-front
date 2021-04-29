@@ -1,0 +1,11 @@
+<p>Posts</p>
+<div *ngFor="let post of page">
+    <a href = {{url}}{{post.id}}>{{post.title}}</a>
+</div>
+<p>
+<button (click) = "first()">first</button>
+<button (click) = "prev()">prev</button>
+<button *ngFor="let page of pages; let i = index" (click) = "selectPage(i)">{{i + 1}}</button>
+<button (click) = "next()">next</button>
+<button (click) = "last()">last</button>
+</p>

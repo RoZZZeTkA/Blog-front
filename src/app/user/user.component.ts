@@ -18,21 +18,20 @@ export class UserComponent implements OnInit {
 
   public user!: User;
   public id!: number;
-  public posts!: Post[];
+  public posts: Post[] = [];
   private subscription: Subscription;
-  public url: String = environment.frontUrl + "/post/";
 
   constructor(private userService: UserService, 
               private postService: PostService,
               private jwtClientService: JwtClientService,
               private activateRoute: ActivatedRoute) {
-                this.subscription = activateRoute.params.subscribe(data => this.id = data['id'])
-               }
+                this.subscription = activateRoute.params.subscribe(data => this.id = data['id']);
+  }
 
   ngOnInit(): void {
     this.getUserById();
     this.getPostsByUserId();
-    }
+  }
 
   public getUserById(): void {
     this.userService.getUserById(this.id, this.jwtClientService.getHeaders())
