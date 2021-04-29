@@ -16,10 +16,12 @@ export class SearhResultsComponent implements OnInit {
 
   constructor(private postService: PostService, 
               private router: Router,
-              private jwtClientService: JwtClientService) { }
+              private jwtClientService: JwtClientService) {
+                router.events.subscribe((data) => this.getPostsByTag());
+              }
 
   ngOnInit(): void {
-    this.getPostsByTag();
+    //this.getPostsByTag();
   }
 
   public getPostsByTag(): void{

@@ -1,4 +1,8 @@
 rozzzblog
+<form (submit) = "onSearch()">
+    <input type="text" placeholder="search" name="query" [(ngModel)] = "query">
+    <button type="submit">search</button>
+</form>
 <hr>
 <div class="wrapper"><router-outlet></router-outlet></div>
 <hr>

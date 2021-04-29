@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,16 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent  implements OnInit {
 
-  constructor(){}
+  public query: string = "";
+
+  constructor(private router: Router){}
 
   ngOnInit(): void {
-    //this.getPostById(postId);
   }
 
-  // public getPostById(postId: number): void {
-  //   this.postService.getPostById(postId).subscribe((response: Post) => {this.post = response},
-  //     (error: HttpErrorResponse) => {alert(error.message);}
-  //   );
-  // }
+  public onSearch(): void{
+    this.router.navigate(['/search'], {queryParams: {t: this.query}});
+  }
 }
  
