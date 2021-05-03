@@ -1,16 +1,22 @@
-<form #addUserForm = "ngForm" (ngSubmit) = "onAddUser(addUserForm)">
-    <h2>Please sign up</h2>
+<div class="login-container">
+  <form #addUserForm = "ngForm" (ngSubmit) = "onAddUser(addUserForm)">
+    <h2>Registration</h2>
     <p>
-      <label>Nickname</label>
-      <input type="text" name="nickname" placeholder="Nickname" ngModel>
+      <label>Nickname</label></p>
+      <p><input type="text" name="nickname" placeholder="Nickname" ngModel>
     </p>
     <p>
-        <label>Email</label>
-        <input type="text" name="email" placeholder="Email" ngModel>
+        <label>Email</label></p>
+        <p><input type="text" name="email" placeholder="Email" ngModel>
     </p>
     <p>
-      <label>Password</label>
-      <input type="password" name="password" placeholder="Password" ngModel>
+      <label>Password</label></p>
+      <p><input type="password" name="password" placeholder="Password" ngModel>
+    </p>
+    <p>
+      <label>Password again</label></p>
+      <p><input type="password" name="password" placeholder="Password">
     </p>
     <button type="submit">Sign up</button>
-</form>
+  </form>
+</div>

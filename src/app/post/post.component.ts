@@ -8,6 +8,8 @@ import { JwtClientService } from '../jwt-client.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
 import { StorageService } from '../storage.service';
+import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-post',
@@ -17,20 +19,21 @@ import { StorageService } from '../storage.service';
 export class PostComponent implements OnInit {
 
   public post!: Post;
+  public user!: User;
   public urls;
   public id!: number;
   private subscription: Subscription;
   public userUrl: String = environment.frontUrl + "/user/";
   public searchUrl: String = environment.frontUrl + "/search?t=";
-  public page;
-  public numberOfElements: number = 3;
-  public currentFirstElement: number = 0;
   public showOverlay: boolean = false;
+  public showSlider: boolean = false;
   public openImageSrc;
+  public offset = 0;
 
 
   constructor(private postService: PostService,
               private storageService: StorageService,
+              private userService: UserService,
               private jwtClientService: JwtClientService,
               private activateRoute: ActivatedRoute) {
                 this.subscription = activateRoute.params.subscribe(data => this.id = data['id'])
@@ -42,27 +45,32 @@ export class PostComponent implements OnInit {
 
   public getPostById(): void {
     this.postService.getPostById(this.id, this.jwtClientService.getHeaders())
-    .subscribe((data: string) => {this.post = JSON.parse(data); console.log(this.post);})
+    .subscribe((data: string) => {this.post = JSON.parse(data); 
+                                  this.userService.getUserById(this.post.userId, this.jwtClientService.getHeaders())
+                                  .subscribe((data: User) => this.user = JSON.parse(data.toString()));})
+
     this.storageService.getUrlsByPostId(this.id, this.jwtClientService.getHeaders())
-    .subscribe((data) => {this.urls = JSON.parse(data.toString()); this.page = this.urls.slice(0, this.numberOfElements);})
+    .subscribe((data) => {this.urls = JSON.parse(data.toString());
+                                      if(this.urls.length != 0){ 
+                                        this.showSlider = true;
+                                        (<HTMLInputElement>document.getElementById('slider-line')).style.width = 1170 * this.urls.length + 'px';
+                                      }
+                                    })
   }
 
   public prev(): void{
-    if(this.currentFirstElement > 0){
-      this.currentFirstElement -= this.numberOfElements;
-      this.changePage();
-    }
+    this.offset += 1170;
+    if(this.offset > 0)
+      this.offset = -1170 * (this.urls.length - 1);
+    (<HTMLInputElement>document.getElementById('slider-line')).style.left = this.offset + 'px'
   }
 
   public next(): void{
-    if(this.currentFirstElement < this.urls.length - this.numberOfElements){
-      this.currentFirstElement += this.numberOfElements;
-      this.changePage();
+    this.offset -= 1170;
+    if(this.offset < -1170 * (this.urls.length - 1)){
+      this.offset = 0;
     }
-  }
-
-  public changePage(): void{
-    this.page = this.urls.slice(this.currentFirstElement, this.currentFirstElement + this.numberOfElements);
+    (<HTMLInputElement>document.getElementById('slider-line')).style.left = this.offset + 'px'
   }
 
   public openImage(url): void{

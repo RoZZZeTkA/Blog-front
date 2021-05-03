@@ -1,8 +1,12 @@
-rozzzblog
+<head>
+<meta name="viewport" content="width=device-width">
+</head>
+<body>
+    rozzzblog
 <form (submit) = "onSearch()">
     <input type="text" placeholder="search" name="query" [(ngModel)] = "query">
     <button type="submit">search</button>
 </form>
-<hr>
-<div class="wrapper"><router-outlet></router-outlet></div>
-<hr>
+<div class="container"><router-outlet></router-outlet></div>
+<!-- <router-outlet></router-outlet> -->
+</body>

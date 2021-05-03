@@ -12,9 +12,4 @@ export class LoginService {
   private apiServerUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) { }
-
-  // public loginUserFromRemote(user: User): Observable<any>{
-  //   console.log(user);
-  //   return  this.http.post(`${this.apiServerUrl}/login`, user)
-  // }
 }

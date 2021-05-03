@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AuthRequest } from './authRequest';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class JwtClientService {
 
   private apiServerUrl = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   public generateToken(request){
     console.log(this.apiServerUrl);
@@ -20,7 +21,7 @@ export class JwtClientService {
 
   public getAccessToken(authRequest: AuthRequest){
     let response = this.generateToken(authRequest);
-    response.subscribe(data => localStorage.setItem("token", "Bearer " + data));
+    response.subscribe(data => {localStorage.setItem("token", "Bearer " + data); this.router.navigate(["/"]);});
   }  
   
   public getHeaders(){
