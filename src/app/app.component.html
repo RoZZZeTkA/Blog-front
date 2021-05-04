@@ -2,11 +2,17 @@
 <meta name="viewport" content="width=device-width">
 </head>
 <body>
-    rozzzblog
-<form (submit) = "onSearch()">
-    <input type="text" placeholder="search" name="query" [(ngModel)] = "query">
-    <button type="submit">search</button>
-</form>
+<div class="header">
+    <div class="header-container">
+        <a class="logo" href={{homeUrl}}>rozzzblog</a>
+        <div class="search-wrapper">
+            <form (submit) = "onSearch()">
+                <input type="text" placeholder="Search" name="query" [(ngModel)] = "query" class="search-input">
+                <button type="submit" class="search-button">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
 <div class="container"><router-outlet></router-outlet></div>
 <!-- <router-outlet></router-outlet> -->
 </body>

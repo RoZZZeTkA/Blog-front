@@ -13,8 +13,7 @@ export class StorageService {
   constructor(private http: HttpClient) { }
 
   public uploadFile(formData: FormData, headers): Observable<string> {
-    return this.http.post<string>(
-      `${this.apiServerUrl}/file/upload`, formData, {headers, responseType: 'text' as 'json' });
+    return this.http.post<string>(`${this.apiServerUrl}/file/upload`, formData, {headers, responseType: 'text' as 'json' });
   }
 
   public getUrlsByPostId(postId: number, headers): Observable<String[]>{

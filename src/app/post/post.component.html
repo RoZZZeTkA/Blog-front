@@ -1,4 +1,8 @@
-<p><a class="user-nickname" href = {{userUrl}}{{post.userId}}>{{user.nickname}}</a></p>
+<p>
+    <a class="user-nickname" href = {{userUrl}}{{post.userId}}>{{user.nickname}}</a>
+    &nbsp;
+    <span class="format-date">{{formatDate}}</span>
+</p>
 <span class="post-title">{{post.title}}</span>
 <p>
     <span *ngFor="let tag of post.postTags">
@@ -6,7 +10,7 @@
         &nbsp;
     </span>
 </p>
-<p>{{post.value}}</p>
+<p *ngFor="let value of splitValue">{{value}}</p>
 
 <div id="slider"  *ngIf = "showSlider">
     <div id="slider-line">
@@ -16,7 +20,14 @@
     </div>
 </div>
 <p *ngIf = "showSlider"><button (click) = "prev()">prev</button>
-    <button (click) = "next()">next</button></p>
+    <button (click) = "next()">next</button>
+</p>
+
+<p>
+    <button (click)="onAddMark(1)">cool</button>
+    <span>{{rating}}</span>
+    <button>not cool</button>
+</p>
 
 <div *ngIf = "showOverlay" (click) = "hideOverlay()" class="overlay">
     <img [src]="openImageSrc" class="open-image">

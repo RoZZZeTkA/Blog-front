@@ -16,7 +16,7 @@ import { UserService } from '../user.service';
 })
 export class UserComponent implements OnInit {
 
-  public user!: User;
+  public user: User = {} as User;
   public id!: number;
   public posts: Post[] = [];
   private subscription: Subscription;

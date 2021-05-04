@@ -1,0 +1,39 @@
+.post-wrapper {
+    padding-top: 9px;
+    padding-bottom: 14px;
+}
+
+.post-title {
+    color: #333333;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 19px;
+}
+
+.post-title:hover {
+    color: #548eaa;
+}
+
+.post-info {
+    font-size: 13px;
+    color: #798E98;
+}
+
+button {
+    background-color: #FFF;
+    color: #6c787f;
+    border: 1px solid #d5dddf;
+    border-radius: 3px;
+    height: 40px;
+    width: 40px;
+}
+
+button:hover {
+    background-color: #edf5f9;
+    color: #4d80aa;
+}
+
+.selected-button {
+    color: #4d80aa;
+    border: 2px solid #4d80aa;
+}

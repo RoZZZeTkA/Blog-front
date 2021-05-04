@@ -1,11 +1,12 @@
 <p>Posts</p>
-<div *ngFor="let post of page">
-    <a href = {{url}}{{post.id}}>{{post.title}}</a>
+<div *ngFor="let post of page; let i = index" class="post-wrapper">
+    <a href = {{url}}{{post.id}} class="post-title">{{post.title}}</a>
+    <div class="post-info">{{formatDate[i]}}</div>
 </div>
 <p>
 <button (click) = "first()">first</button>
 <button (click) = "prev()">prev</button>
-<button *ngFor="let page of pages; let i = index" (click) = "selectPage(i)">{{i + 1}}</button>
+<button *ngFor="let page of pages; let i = index" (click) = "selectPage(i, $event)" class="" id=i>{{i + 1}}</button>
 <button (click) = "next()">next</button>
 <button (click) = "last()">last</button>
 </p>

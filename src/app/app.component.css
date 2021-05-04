@@ -6,3 +6,59 @@
     max-width: 1170px;
     margin: 0px auto;
 }
+
+.header {
+    /* margin: 0; */
+    /* padding: 0;
+    border: 0; */
+    background-color: #303B44;
+    height: 48px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1170px;
+    margin: 0px auto;
+    padding-top: 0px;
+    
+}
+
+.logo {
+    color: white;
+    padding: 0 auto;
+    margin-top: 16px;
+    text-decoration: none;
+}
+
+/* .search-wrapper {
+
+} */
+
+.search-wrapper{
+    padding-top: 7px;
+}
+
+.search-input {
+    height: 30px;
+    width: 300px;
+    /* margin-top: 7px; */
+    border: 1px solid #cdd5d9;
+    border-radius: 3px;
+    font-size: 14px;
+    color: #333;
+}
+
+.search-button {
+    height: 32px;
+    border: 1px solid #cdd5d9;
+    border-radius: 3px;
+    padding-top: 0;
+    color: #838A92;
+    /* margin-bottom: 7px; */
+}
+
+.search-button:hover {
+    border: 1px solid #4E879C;
+    color: #4E879C;
+}

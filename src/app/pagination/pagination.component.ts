@@ -15,6 +15,8 @@ export class PaginationComponent implements OnInit {
   public numberOfPosts: number = 5;
   public currentFirstPost: number = 0;
   public url: String = environment.frontUrl + "/post/";
+  public formatDate: string[] = [];
+  public lastSelected;
 
   constructor() { }
 
@@ -27,6 +29,31 @@ export class PaginationComponent implements OnInit {
       this.pages = new Array(this.posts.length / this.numberOfPosts);
     else
       this.pages = new Array(Math.floor(this.posts.length / this.numberOfPosts) + 1);
+
+    if(this.posts.length != 0){
+      for(let i = 0; i < this.posts.length; i++){
+        let date = new Date(this.posts[i].date);
+        let day = date.getDate().toString();
+        let month = date.getMonth().toString();
+        let hours = date.getHours().toString();
+        let minutes = date.getMinutes().toString();
+        if(date.getDate() < 10){
+          day = "0" + date.getDate();
+        }
+        if(date.getMonth() < 10){
+          month = "0" + (date.getMonth() + 1);
+        }
+        if(date.getHours() < 10){
+          hours = "0" + date.getHours();
+        }
+        if(date.getMinutes() < 10){
+          minutes = "0" + date.getMinutes();
+        }
+        this.formatDate[i] = (day + "." + month + "." + date.getFullYear() + " " + hours + ":" + minutes);
+      }
+    }
+    this.lastSelected = (<HTMLInputElement>document.getElementsByTagName('button')[2]);
+    //this.lastSelected.setAttribute('class', 'selected-button');
   }
 
   public first(): void{
@@ -41,7 +68,11 @@ export class PaginationComponent implements OnInit {
     }
   }
 
-  public selectPage(pageNumber: number): void{
+  public selectPage(pageNumber: number, event): void{
+    console.log(this.lastSelected);
+    this.lastSelected.setAttribute('class', '');
+    event.target.setAttribute('class', 'selected-button');
+    this.lastSelected = event.target;
     this.currentFirstPost = pageNumber * this.numberOfPosts;
     this.changePage();
   }
@@ -49,12 +80,17 @@ export class PaginationComponent implements OnInit {
   public next(): void{
     if(this.currentFirstPost < this.posts.length - this.numberOfPosts){
       this.currentFirstPost += this.numberOfPosts;
+      console.log("next: " + this.currentFirstPost);
       this.changePage();
     }
   }
 
   public last(): void{
-    this.currentFirstPost = this.posts.length - this.posts.length % this.numberOfPosts;
+    let rest = this.posts.length % this.numberOfPosts;
+    if(rest == 0){
+      rest = this.numberOfPosts;
+    }
+    this.currentFirstPost = this.posts.length - rest;
     this.changePage();
   }
 

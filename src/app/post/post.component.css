@@ -37,7 +37,7 @@
 }
 
 .overlay{
-    position: absolute;
+    position: fixed;
     z-index: 10;
     top: 0;
     left: 0;
@@ -48,7 +48,7 @@
 }
 
 .post-title{
-    font-weight: 500;
+    font-weight: 600;
     font-size: 32px;
     line-height: 40px;
 }
@@ -58,12 +58,28 @@
     color: #5e6973;
 }
 
+.post-tag:hover {
+    color: #548eaa;
+}
+
 .post-text{
     width: 500px;
 }
 
 .user-nickname{
     color: #548EAA;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+    text-decoration: none;
+}
+
+.user-nickname:hover {
+    color: #487284;
+}
+
+.format-date{
+    color: #5F5F5F;
     font-weight: 500;
     font-size: 14px;
     text-decoration: none;

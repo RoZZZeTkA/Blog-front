@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { JwtClientService } from '../jwt-client.service';
+import { MarkService } from '../mark.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
 import { StorageService } from '../storage.service';
@@ -18,10 +19,10 @@ import { UserService } from '../user.service';
 })
 export class PostComponent implements OnInit {
 
-  public post!: Post;
-  public user!: User;
+  public post: Post = {} as Post;
+  public user: User = {} as User;
   public urls;
-  public id!: number;
+  public id: number = 0;
   private subscription: Subscription;
   public userUrl: String = environment.frontUrl + "/user/";
   public searchUrl: String = environment.frontUrl + "/search?t=";
@@ -29,11 +30,15 @@ export class PostComponent implements OnInit {
   public showSlider: boolean = false;
   public openImageSrc;
   public offset = 0;
+  public formatDate: string = "";
+  public splitValue: string[] = [];
+  public rating: number = 0;
 
 
   constructor(private postService: PostService,
               private storageService: StorageService,
               private userService: UserService,
+              private markService: MarkService,
               private jwtClientService: JwtClientService,
               private activateRoute: ActivatedRoute) {
                 this.subscription = activateRoute.params.subscribe(data => this.id = data['id'])
@@ -47,7 +52,32 @@ export class PostComponent implements OnInit {
     this.postService.getPostById(this.id, this.jwtClientService.getHeaders())
     .subscribe((data: string) => {this.post = JSON.parse(data); 
                                   this.userService.getUserById(this.post.userId, this.jwtClientService.getHeaders())
-                                  .subscribe((data: User) => this.user = JSON.parse(data.toString()));})
+                                  .subscribe((data: User) => this.user = JSON.parse(data.toString()));
+                                  let date = new Date(this.post.date);
+                                  let day = date.getDate().toString();
+                                  let month = date.getMonth().toString();
+                                  let hours = date.getHours().toString();
+                                  let minutes = date.getMinutes().toString();
+                                  if(date.getDate() < 10){
+                                    day = "0" + date.getDate();
+                                  }
+                                  if(date.getMonth() < 10){
+                                    month = "0" + (date.getMonth() + 1);
+                                  }
+                                  if(date.getHours() < 10){
+                                    hours = "0" + date.getHours();
+                                  }
+                                  if(date.getMinutes() < 10){
+                                    minutes = "0" + date.getMinutes();
+                                  }
+                                  this.formatDate += (day + "." + month + "." + date.getFullYear() + " " + hours + ":" + minutes);
+                                  for(let i = 0; i < this.post.value.split("\n").length; i++){
+                                    this.splitValue[i] = this.post.value.split("\n")[i];
+                                  }
+                                  for(let i = 0; i < this.post.postMarks.length; i++){
+                                    this.rating += this.post.postMarks[i].value;
+                                  }
+                                })
 
     this.storageService.getUrlsByPostId(this.id, this.jwtClientService.getHeaders())
     .subscribe((data) => {this.urls = JSON.parse(data.toString());
@@ -81,5 +111,14 @@ export class PostComponent implements OnInit {
 
   public hideOverlay(): void{
     this.showOverlay = false;
+  }
+
+  public onAddMark(markValue: number): void{
+    let formData = new FormData();
+    formData.append('postId', this.id.toString());
+    formData.append('value', markValue.toString());
+    this.markService.addMark(formData,  this.jwtClientService.getHeaders()).subscribe(
+      (data) => {console.log(data);}
+    )
   }
 }
