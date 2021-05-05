@@ -78,10 +78,33 @@
     color: #487284;
 }
 
-.format-date{
+.format-date {
     color: #5F5F5F;
     font-weight: 500;
     font-size: 14px;
     text-decoration: none;
     text-decoration: none;
+}
+
+.mark-button {
+    background-color: #FFF;
+    color: #6c787f;
+    border: 1px solid #d5dddf;
+    border-radius: 3px;
+    height: 40px;
+    width: 40px;
+}
+
+.mark-button:hover {
+    background-color: #edf5f9;
+    color: #4d80aa;
+}
+
+.mark-button:active {
+    color: #4d80aa;
+    border: 2px solid #4d80aa;
+}
+
+.rating {
+    color: #6c787f;
 }

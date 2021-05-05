@@ -24,9 +24,9 @@
 </p>
 
 <p>
-    <button (click)="onAddMark(1)">cool</button>
-    <span>{{rating}}</span>
-    <button>not cool</button>
+    <button (click)="onAddMark(1)" class="mark-button">&#8593;</button>
+    <span class="rating">{{rating}}</span>
+    <button (click)="onAddMark(-1)" class="mark-button">&#8595;</button>
 </p>
 
 <div *ngIf = "showOverlay" (click) = "hideOverlay()" class="overlay">
