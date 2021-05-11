@@ -18,15 +18,18 @@ export class SearhResultsComponent implements OnInit {
               private router: Router,
               private jwtClientService: JwtClientService) {
                 router.events.subscribe((data) => this.getPostsByTag());
+                
               }
 
   ngOnInit(): void {
     //this.getPostsByTag();
+    // this.router.events.subscribe((data) => this.getPostsByTag());
   }
 
   public getPostsByTag(): void{
+    console.log("getPostsByTag")
     this.postService.getPostsByTag(this.router.url.substring(10, this.router.url.length), this.jwtClientService.getHeaders())
-    .subscribe(data => {this.posts = JSON.parse(data.toString());})
+    .subscribe(data => this.posts = JSON.parse(data.toString()))
   }
 
 }

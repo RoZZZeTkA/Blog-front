@@ -3,20 +3,21 @@
     <h2>Registration</h2>
     <p>
       <label>Nickname</label></p>
-      <p><input type="text" name="nickname" placeholder="Nickname" ngModel>
+      <p><input #spy type="text" name="nickname" placeholder="Nickname" ngModel required>
     </p>
     <p>
         <label>Email</label></p>
-        <p><input type="text" name="email" placeholder="Email" ngModel>
+        <p><input type="text" name="email" placeholder="Email" ngModel required>
     </p>
     <p>
       <label>Password</label></p>
-      <p><input type="password" name="password" placeholder="Password" ngModel>
+      <p><input type="password" name="password" placeholder="Password" [(ngModel)]="password" ngModel required>
     </p>
     <p>
-      <label>Password again</label></p>
-      <p><input type="password" name="password" placeholder="Password">
+      <label>Repeat password</label></p>
+      <p><input type="password" name="repeatPassword" id="repeatPassword" placeholder="Password" class="repeatPassword" [(ngModel)]="repeatPassword" (ngModelChange)="repeatPasswordChange()">
     </p>
-    <button type="submit">Sign up</button>
+    <button type="submit" [disabled]="!addUserForm.form.valid">Sign up</button>
   </form>
+  <!-- {{spy.className}} -->
 </div>

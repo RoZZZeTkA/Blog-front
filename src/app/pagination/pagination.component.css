@@ -37,3 +37,21 @@ button:hover {
     color: #4d80aa;
     border: 2px solid #4d80aa;
 }
+
+
+.button-wrapper{
+    display: flex;
+}
+
+#slider{
+    width: 360px;
+    height: 40px;
+    overflow: hidden;
+}
+
+#slider-line{
+    height: 40px;
+    width: 520px;
+    position: relative;
+    left: 0;
+}

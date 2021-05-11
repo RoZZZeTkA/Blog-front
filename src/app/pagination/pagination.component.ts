@@ -17,6 +17,7 @@ export class PaginationComponent implements OnInit {
   public url: String = environment.frontUrl + "/post/";
   public formatDate: string[] = [];
   public lastSelected;
+  public offset = 0;
 
   constructor() { }
 
@@ -51,6 +52,10 @@ export class PaginationComponent implements OnInit {
         }
         this.formatDate[i] = (day + "." + month + "." + date.getFullYear() + " " + hours + ":" + minutes);
       }
+      (<HTMLInputElement>document.getElementById('slider-line')).style.width = 40 * this.pages.length + 'px';
+      if(this.pages.length < 9){
+        (<HTMLInputElement>document.getElementById('slider')).style.width = 40 * this.pages.length + 'px';
+      }
     }
     this.lastSelected = (<HTMLInputElement>document.getElementsByTagName('button')[2]);
     //this.lastSelected.setAttribute('class', 'selected-button');
@@ -59,6 +64,11 @@ export class PaginationComponent implements OnInit {
   public first(): void{
     this.currentFirstPost = 0;
     this.changePage();
+
+    if(this.pages.length > 9){
+      this.offset = 0;
+      (<HTMLInputElement>document.getElementById('slider-line')).style.left = this.offset + 'px';
+    }
   }
 
   public prev(): void{
@@ -66,23 +76,46 @@ export class PaginationComponent implements OnInit {
       this.currentFirstPost -= this.numberOfPosts;
       this.changePage();
     }
+
+    if(this.offset < 0 && this.currentFirstPost < 5 * (this.pages.length - 5))
+      this.offset += 40;
+    (<HTMLInputElement>document.getElementById('slider-line')).style.left = this.offset + 'px';
   }
 
   public selectPage(pageNumber: number, event): void{
-    console.log(this.lastSelected);
+    // console.log(this.lastSelected);
     this.lastSelected.setAttribute('class', '');
     event.target.setAttribute('class', 'selected-button');
     this.lastSelected = event.target;
     this.currentFirstPost = pageNumber * this.numberOfPosts;
     this.changePage();
+
+    if(this.pages.length > 9){
+      if(pageNumber > 3){
+        if(pageNumber < this.pages.length - 4){
+          console.log("pageNumber: " + pageNumber);
+          this.offset = -40 * (pageNumber - 4);
+        } else {
+          this.offset = -40 * (this.pages.length - 9);
+        }
+      } else {
+        this.offset = 0;
+      }
+    (<HTMLInputElement>document.getElementById('slider-line')).style.left = this.offset + 'px';
+    }
   }
 
   public next(): void{
     if(this.currentFirstPost < this.posts.length - this.numberOfPosts){
       this.currentFirstPost += this.numberOfPosts;
-      console.log("next: " + this.currentFirstPost);
+      // console.log("currentFirstPost: " + this.currentFirstPost);
       this.changePage();
     }
+
+    if(this.offset > -40 * (this.pages.length - 9) && this.currentFirstPost > 20){
+      this.offset -= 40;
+    }
+    (<HTMLInputElement>document.getElementById('slider-line')).style.left = this.offset + 'px';
   }
 
   public last(): void{
@@ -92,6 +125,11 @@ export class PaginationComponent implements OnInit {
     }
     this.currentFirstPost = this.posts.length - rest;
     this.changePage();
+
+    if(this.pages.length > 9){
+    this.offset = -40 * (this.pages.length - 9);
+    (<HTMLInputElement>document.getElementById('slider-line')).style.left = this.offset + 'px';
+    }
   }
 
   public changePage(): void{

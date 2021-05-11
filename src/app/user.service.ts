@@ -20,6 +20,10 @@ export class UserService {
     return this.http.get<User>(`${this.apiServerUrl}/user/find/${userId}`, {headers, responseType: 'text' as 'json' });
   }
 
+  public getCurrentUser(headers): Observable<User> {
+    return this.http.get<User>(`${this.apiServerUrl}/user/current`, {headers, responseType: 'text' as 'json' });
+  }
+
   public addUsers(user: User): Observable<User> {
     return this.http.post<User>(`${this.apiServerUrl}/user/add`, user);
   }

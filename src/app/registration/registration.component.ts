@@ -12,6 +12,9 @@ import { UserService } from '../user.service';
 })
 export class RegistrationComponent implements OnInit {
 
+  public password: string = "";
+  public repeatPassword: string = "";
+
   constructor(private userService: UserService, 
               private jwtClientService: JwtClientService, 
               private router: Router,
@@ -27,8 +30,19 @@ export class RegistrationComponent implements OnInit {
       (data: User) => {
         console.log(data);
         this.router.navigate(["/"]);
+      },
+      (error) => {
+        alert("Error");
       }
     );
+  }
+
+  public repeatPasswordChange(): void{
+    if(this.password === this.repeatPassword){
+     (<HTMLInputElement>document.getElementById('repeatPassword')).style.borderLeft = "5px solid #42A948";
+    } else {
+      (<HTMLInputElement>document.getElementById('repeatPassword')).style.borderLeft = "5px solid #A94442";
+    }
   }
 
 }

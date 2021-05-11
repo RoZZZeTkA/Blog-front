@@ -53,6 +53,9 @@ export class AddPostComponent implements OnInit {
         //     )
         //   }
         // }
+      },
+      (error: HttpErrorResponse) => {
+        alert("Failed to add post");
       }
     );
   }

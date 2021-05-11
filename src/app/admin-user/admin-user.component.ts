@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -45,7 +46,10 @@ export class AdminUserComponent implements OnInit {
 
   public onDeletePost(postId: number): void{
     this.postService.deletePost(postId, this.jwtClientService.getHeaders())
-    .subscribe((data: void) => {this.getPostsByUserId();})
+    .subscribe((data: void) => {this.getPostsByUserId();},
+    (error: HttpErrorResponse) => {
+      alert("You don't have enough rights ");
+    })
   }
 
 }

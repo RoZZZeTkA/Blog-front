@@ -5,6 +5,8 @@
 <div class="header">
     <div class="header-container">
         <a class="logo" href={{homeUrl}}>rozzzblog</a>
+        &nbsp;
+        <a class="logo" href={{userUrl}}{{user.id}} ngIf="showProfileButton">{{user.nickname}}</a>
         <div class="search-wrapper">
             <form (submit) = "onSearch()">
                 <input type="text" placeholder="Search" name="query" [(ngModel)] = "query" class="search-input">
@@ -14,5 +16,4 @@
     </div>
 </div>
 <div class="container"><router-outlet></router-outlet></div>
-<!-- <router-outlet></router-outlet> -->
 </body>

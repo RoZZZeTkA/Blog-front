@@ -33,6 +33,7 @@ export class PostComponent implements OnInit {
   public formatDate: string = "";
   public splitValue: string[] = [];
   public rating: number = 0;
+  public imageWidth: number = 1170;
 
 
   constructor(private postService: PostService,
@@ -77,27 +78,28 @@ export class PostComponent implements OnInit {
                                   for(let i = 0; i < this.post.postMarks.length; i++){
                                     this.rating += this.post.postMarks[i].value;
                                   }
+                                  (<HTMLInputElement>document.getElementById('slider-line')).style.width = this.imageWidth * this.urls.length + 'px';
                                 })
 
     this.storageService.getUrlsByPostId(this.id, this.jwtClientService.getHeaders())
     .subscribe((data) => {this.urls = JSON.parse(data.toString());
                                       if(this.urls.length != 0){ 
                                         this.showSlider = true;
-                                        (<HTMLInputElement>document.getElementById('slider-line')).style.width = 1170 * this.urls.length + 'px';
+                                        // (<HTMLInputElement>document.getElementById('slider-line')).style.width = this.imageWidth * this.urls.length + 'px';
                                       }
                                     })
   }
 
   public prev(): void{
-    this.offset += 1170;
+    this.offset += this.imageWidth;
     if(this.offset > 0)
-      this.offset = -1170 * (this.urls.length - 1);
+      this.offset = -this.imageWidth * (this.urls.length - 1);
     (<HTMLInputElement>document.getElementById('slider-line')).style.left = this.offset + 'px'
   }
 
   public next(): void{
-    this.offset -= 1170;
-    if(this.offset < -1170 * (this.urls.length - 1)){
+    this.offset -= this.imageWidth;
+    if(this.offset < -this.imageWidth * (this.urls.length - 1)){
       this.offset = 0;
     }
     (<HTMLInputElement>document.getElementById('slider-line')).style.left = this.offset + 'px'
