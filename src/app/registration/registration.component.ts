@@ -29,7 +29,7 @@ export class RegistrationComponent implements OnInit {
     this.userService.addUsers(addUserForm.value).subscribe(
       (data: User) => {
         console.log(data);
-        this.router.navigate(["/"]);
+        alert("Check your email");
       },
       (error) => {
         alert("Error");

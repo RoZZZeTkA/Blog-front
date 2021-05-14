@@ -19,6 +19,7 @@ import { HomeComponent } from './home/home.component';
 import { SearhResultsComponent } from './searh-results/searh-results.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { HeaderComponent } from './header/header.component';
+import { ActivationComponent } from './activation/activation.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { HeaderComponent } from './header/header.component';
     HomeComponent,
     SearhResultsComponent,
     PaginationComponent,
-    HeaderComponent
+    HeaderComponent,
+    ActivationComponent
   ],
   imports: [
     BrowserModule,

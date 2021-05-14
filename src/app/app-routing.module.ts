@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ActivationComponent } from './activation/activation.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { AdminComponent } from './admin/admin.component';
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'admin', component:AdminComponent},
   {path: 'admin/user/:id', component:AdminUserComponent},
   {path: '', component:HomeComponent},
-  {path: 'search', component:SearhResultsComponent}
+  {path: 'search', component:SearhResultsComponent},
+  {path: 'activation/:activationCode', component:ActivationComponent}
 ];
 
 @NgModule({

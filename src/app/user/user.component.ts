@@ -25,7 +25,7 @@ export class UserComponent implements OnInit {
               private postService: PostService,
               private jwtClientService: JwtClientService,
               private activateRoute: ActivatedRoute) {
-                this.subscription = activateRoute.params.subscribe(data => this.id = data['id']);
+              this.subscription = activateRoute.params.subscribe(data => this.id = data['id']);
   }
 
   ngOnInit(): void {
