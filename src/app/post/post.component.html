@@ -10,9 +10,11 @@
         &nbsp;
     </span>
 </p>
-<p *ngFor="let value of splitValue">{{value}}</p>
+<p *ngFor="let value of splitValue" class="post-text">{{value}}</p>
 
 <div id="slider"  *ngIf = "showSlider">
+    <div class="prevButtton" (click)="prev()"></div>
+    <div class="nextButtton" (click)="next()"></div>
     <div id="slider-line">
         <div class="image-wrapper" *ngFor="let link of urls">
             <img src="{{link.url}}" (click) = "openImage(link.url)" class="mini-image">

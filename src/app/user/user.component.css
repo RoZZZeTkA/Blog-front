@@ -1,5 +1,24 @@
 .nickname {
     color: #343434;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 600;
+}
+
+.profile-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    height: 34px;
+    border: 0px;
+    border-radius: 3px;
+    padding-top: 0;
+    color: white;
+    background-color: #65a3be;
+    padding: 10px 10px;
+}
+
+button:hover {
+    background-color: #4986A1;
 }

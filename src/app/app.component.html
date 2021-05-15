@@ -1,20 +1,18 @@
-<head>
-<meta name="viewport" content="width=device-width">
-</head>
-<body>
 <div class="header">
     <div class="header-container">
         <a class="logo" href={{homeUrl}}>rozzzblog</a>
         &nbsp;
-        <!-- <a class="logo" href={{userUrl}}{{user.id}} *ngIf="showProfileButton">{{user.nickname}}</a> -->
-        <a class="logo" href={{userUrl}}{{user.id}}>{{user.nickname}}</a>
+        <a class="logo" href={{userUrl}}{{user.id}} *ngIf="showProfileButton">{{user.nickname}}</a>
+        <!-- <a class="logo" href={{userUrl}}{{user.id}}>{{user.nickname}}</a> -->
         <div class="search-wrapper">
             <form (submit) = "onSearch()">
                 <input type="text" placeholder="Search" name="query" [(ngModel)] = "query" class="search-input">
                 <button type="submit" class="search-button">Search</button>
             </form>
         </div>
+        <button (click)="login()" *ngIf="showLogin" class="login-logout">Login</button>
+        <button (click)="logout()" *ngIf="!showLogin" class="login-logout">Logout</button>
     </div>
 </div>
 <div class="container"><router-outlet></router-outlet></div>
-</body>
+    

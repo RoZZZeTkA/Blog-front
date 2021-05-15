@@ -1,4 +1,3 @@
-<p>Posts</p>
 <div *ngFor="let post of page; let i = index" class="post-wrapper">
     <a href = {{url}}{{post.id}} class="post-title">{{post.title}}</a>
     <div class="post-info">{{formatDate[i]}}</div>

@@ -63,7 +63,7 @@
 }
 
 .post-text{
-    width: 500px;
+    font-size: 19px;
 }
 
 .user-nickname{
@@ -107,4 +107,39 @@
 
 .rating {
     color: #6c787f;
+}
+
+.prevButtton {
+    background-color: rgba(137, 43, 226, 0);
+    height: 658px;
+    width: 200px;
+    position: absolute;
+    z-index: 100;
+    text-align: center;
+}
+
+.prevButtton:hover {
+    background-color: rgba(137, 43, 226, 0.7);
+    height: 658px;
+    width: 200px;
+    position: absolute;
+    z-index: 100;
+}
+
+.nextButtton {
+    background-color: rgba(43, 226, 43, 0);
+    height: 658px;
+    width: 200px;
+    position: absolute;
+    z-index: 100;
+    text-align: center;
+    right: 90px;
+}
+
+.nextButtton:hover {
+    background-color: rgba(43, 226, 43, 0.7);
+    height: 658px;
+    width: 200px;
+    position: absolute;
+    z-index: 100;
 }

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { JwtClientService } from '../jwt-client.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-searh-results',
@@ -17,8 +18,8 @@ export class SearhResultsComponent implements OnInit {
   constructor(private postService: PostService, 
               private router: Router,
               private jwtClientService: JwtClientService) {
-                router.events.subscribe((data) => this.getPostsByTag());
-                
+                // router.events.subscribe((data) => this.getPostsByTag());
+                router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((data) => this.getPostsByTag());
               }
 
   ngOnInit(): void {

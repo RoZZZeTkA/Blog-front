@@ -20,13 +20,16 @@ textarea {
     margin-bottom: 0px;
  }
 
- button {
-    background-color: #65a3be;
-    border: none;
+button {
+    height: 34px;
+    border: 0px;
+    border-radius: 3px;
+    padding-top: 0;
     color: white;
-    padding: 10px 22px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
+    background-color: #65a3be;
+    padding: 10px 10px;
+}
+
+button:hover {
+    background-color: #4986A1;
 }

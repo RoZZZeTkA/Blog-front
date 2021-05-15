@@ -71,13 +71,16 @@ export class PostComponent implements OnInit {
                                   if(date.getMinutes() < 10){
                                     minutes = "0" + date.getMinutes();
                                   }
+                                  this.formatDate = "";
                                   this.formatDate += (day + "." + month + "." + date.getFullYear() + " " + hours + ":" + minutes);
                                   for(let i = 0; i < this.post.value.split("\n").length; i++){
                                     this.splitValue[i] = this.post.value.split("\n")[i];
                                   }
-                                  for(let i = 0; i < this.post.postMarks.length; i++){
-                                    this.rating += this.post.postMarks[i].value;
-                                  }
+                                  // for(let i = 0; i < this.post.postMarks.length; i++){
+                                  //   this.rating += this.post.postMarks[i].value;
+                                  // }
+                                  this.calculateRating();
+                                  if(this.urls)
                                   (<HTMLInputElement>document.getElementById('slider-line')).style.width = this.imageWidth * this.urls.length + 'px';
                                 })
 
@@ -90,14 +93,14 @@ export class PostComponent implements OnInit {
                                     })
   }
 
-  public prev(): void{
+  public prev(): void {
     this.offset += this.imageWidth;
     if(this.offset > 0)
       this.offset = -this.imageWidth * (this.urls.length - 1);
     (<HTMLInputElement>document.getElementById('slider-line')).style.left = this.offset + 'px'
   }
 
-  public next(): void{
+  public next(): void {
     this.offset -= this.imageWidth;
     if(this.offset < -this.imageWidth * (this.urls.length - 1)){
       this.offset = 0;
@@ -105,22 +108,33 @@ export class PostComponent implements OnInit {
     (<HTMLInputElement>document.getElementById('slider-line')).style.left = this.offset + 'px'
   }
 
-  public openImage(url): void{
+  public openImage(url): void {
     console.log(url);
     this.showOverlay = true;
     this.openImageSrc = url;
   }
 
-  public hideOverlay(): void{
+  public hideOverlay(): void {
     this.showOverlay = false;
   }
 
-  public onAddMark(markValue: number): void{
+  public onAddMark(markValue: number): void {
     let formData = new FormData();
     formData.append('postId', this.id.toString());
     formData.append('value', markValue.toString());
     this.markService.addMark(formData,  this.jwtClientService.getHeaders()).subscribe(
-      (data) => {console.log(data);}
+      (data) => {console.log(data); this.getPostById(); this.calculateRating();},
+      (error: HttpErrorResponse) => {
+        alert("Sign in to rate");
+      }
     )
+    
+  }
+
+  public calculateRating(): void {
+    this.rating = 0;
+    for(let i = 0; i < this.post.postMarks.length; i++){
+      this.rating += this.post.postMarks[i].value;
+    }
   }
 }

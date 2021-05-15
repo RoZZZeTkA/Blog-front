@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
 import { PostComponent } from './post/post.component';
-import { SecurityComponent } from './security/security.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { AdminComponent } from './admin/admin.component';
@@ -18,7 +17,6 @@ import { AdminUserComponent } from './admin-user/admin-user.component';
 import { HomeComponent } from './home/home.component';
 import { SearhResultsComponent } from './searh-results/searh-results.component';
 import { PaginationComponent } from './pagination/pagination.component';
-import { HeaderComponent } from './header/header.component';
 import { ActivationComponent } from './activation/activation.component';
 
 @NgModule({
@@ -27,7 +25,6 @@ import { ActivationComponent } from './activation/activation.component';
     LoginComponent,
     UserComponent,
     PostComponent,
-    SecurityComponent,
     RegistrationComponent,
     AddPostComponent,
     AdminComponent,
@@ -35,7 +32,6 @@ import { ActivationComponent } from './activation/activation.component';
     HomeComponent,
     SearhResultsComponent,
     PaginationComponent,
-    HeaderComponent,
     ActivationComponent
   ],
   imports: [
