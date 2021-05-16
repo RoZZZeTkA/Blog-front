@@ -52,13 +52,17 @@ export class PaginationComponent implements OnInit {
         }
         this.formatDate[i] = (day + "." + month + "." + date.getFullYear() + " " + hours + ":" + minutes);
       }
-      (<HTMLInputElement>document.getElementById('slider-line')).style.width = 40 * this.pages.length + 'px';
-      if(this.pages.length < 9){
-        (<HTMLInputElement>document.getElementById('slider')).style.width = 40 * this.pages.length + 'px';
-      }
     }
-    this.lastSelected = (<HTMLInputElement>document.getElementsByTagName('button')[2]);
+    this.lastSelected = (<HTMLInputElement>document.getElementsByTagName('button')[0]);
+    // console.log(this.lastSelected);
     //this.lastSelected.setAttribute('class', 'selected-button');
+  }
+
+  ngAfterViewChecked(): void {
+    if((<HTMLInputElement>document.getElementById('slider')) != null && this.pages.length < 9)
+      (<HTMLInputElement>document.getElementById('slider')).style.width = 40 * this.pages.length + 'px';
+    if((<HTMLInputElement>document.getElementById('slider-line')) != null )
+      (<HTMLInputElement>document.getElementById('slider-line')).style.width = 40 * this.pages.length + 'px';
   }
 
   public first(): void{

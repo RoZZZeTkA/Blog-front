@@ -39,7 +39,7 @@ export class RegistrationComponent implements OnInit {
         alert("Check your email");
       },
       (error) => {
-        alert("Error");
+        alert("Error: " + error.message);
       }
     );
   }

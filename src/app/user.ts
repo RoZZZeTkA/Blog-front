@@ -3,6 +3,6 @@ export interface User {
     nickname: string;
     email: string;
     password: string;
-    enable: number;
     role: string;
+    path: string;
 }

@@ -15,10 +15,21 @@ button {
     border-radius: 3px;
     padding-top: 0;
     color: white;
-    background-color: #65a3be;
     padding: 10px 10px;
 }
 
-button:hover {
+.showAddPostButton {
+    background-color: #65a3be;
+}
+
+.showAddPostButton:hover {
     background-color: #4986A1;
+}
+
+.showPromoteButton {
+    background-color: #be6565;
+}
+
+.showPromoteButton:hover {
+    background-color: #a14949;
 }

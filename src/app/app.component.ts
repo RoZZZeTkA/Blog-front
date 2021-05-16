@@ -48,6 +48,10 @@ export class AppComponent  implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  public signUp(): void {
+    this.router.navigate(['/registration']);
+  }
+
   public logout(): void {
     localStorage.clear();
     this.showProfileButton = false;

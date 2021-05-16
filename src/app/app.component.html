@@ -10,8 +10,11 @@
                 <button type="submit" class="search-button">Search</button>
             </form>
         </div>
-        <button (click)="login()" *ngIf="showLogin" class="login-logout">Login</button>
-        <button (click)="logout()" *ngIf="!showLogin" class="login-logout">Logout</button>
+        <div>
+            <button (click)="login()" *ngIf="showLogin" class="login-logout">Sign in</button>
+            <button (click)="signUp()" *ngIf="showLogin" class="login-logout">Sign up</button>
+            <button (click)="logout()" *ngIf="!showLogin" class="login-logout">Logout</button>
+        </div>
     </div>
 </div>
 <div class="container"><router-outlet></router-outlet></div>

@@ -76,19 +76,15 @@ export class PostComponent implements OnInit {
                                   for(let i = 0; i < this.post.value.split("\n").length; i++){
                                     this.splitValue[i] = this.post.value.split("\n")[i];
                                   }
-                                  // for(let i = 0; i < this.post.postMarks.length; i++){
-                                  //   this.rating += this.post.postMarks[i].value;
-                                  // }
                                   this.calculateRating();
-                                  if(this.urls)
-                                  (<HTMLInputElement>document.getElementById('slider-line')).style.width = this.imageWidth * this.urls.length + 'px';
+                                  if(this.urls.length != 0)
+                                    (<HTMLInputElement>document.getElementById('slider-line')).style.width = this.imageWidth * this.urls.length + 'px';
                                 })
 
     this.storageService.getUrlsByPostId(this.id, this.jwtClientService.getHeaders())
     .subscribe((data) => {this.urls = JSON.parse(data.toString());
                                       if(this.urls.length != 0){ 
                                         this.showSlider = true;
-                                        // (<HTMLInputElement>document.getElementById('slider-line')).style.width = this.imageWidth * this.urls.length + 'px';
                                       }
                                     })
   }

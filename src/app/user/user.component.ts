@@ -21,6 +21,7 @@ export class UserComponent implements OnInit {
   public posts: Post[] = [];
   private subscription: Subscription;
   public showAddPostButton: boolean = false;
+  public showPromoteButton: boolean = false;
 
   constructor(private userService: UserService, 
               private postService: PostService,
@@ -38,6 +39,10 @@ export class UserComponent implements OnInit {
       .subscribe((data: User) => {data = JSON.parse(data.toString());
                                   if(data.nickname === this.user.nickname){ 
                                     this.showAddPostButton = true;
+                                  } else {
+                                    if(data.role === "ADMIN" && this.user.role != "ADMIN"){
+                                      this.showPromoteButton = true;
+                                    }
                                   }
       })
     }
@@ -55,5 +60,11 @@ export class UserComponent implements OnInit {
 
   public onAddPost(): void {
     this.router.navigate(['/post-add']);
+  }
+
+  public onPromote(): void {
+    this.userService.promoteToAdmin(this.id, this.jwtClientService.getHeaders())
+    .subscribe((data: User) => {this.user = JSON.parse(data.toString());
+                                this.showPromoteButton = false;})
   }
 }

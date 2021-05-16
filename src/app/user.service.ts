@@ -25,7 +25,12 @@ export class UserService {
     return this.http.get<User>(`${this.apiServerUrl}/user/current`, {headers, responseType: 'text' as 'json' });
   }
 
+  public promoteToAdmin(userId: number, headers): Observable<User> {
+    return this.http.get<User>(`${this.apiServerUrl}/user/promote/${userId}`, {headers, responseType: 'text' as 'json' });
+  }
+
   public addUsers(user: User): Observable<User> {
+    user.path = window.location.protocol + "//" + window.location.host;
     return this.http.post<User>(`${this.apiServerUrl}/user/add`, user);
   }
 

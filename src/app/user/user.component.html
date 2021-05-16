@@ -1,5 +1,6 @@
 <div class="profile-wrapper">
     <span class="nickname">{{user.nickname}}</span>
-    <button *ngIf="showAddPostButton" (click)="onAddPost()">Add post</button>
+    <button class="showAddPostButton" *ngIf="showAddPostButton" (click)="onAddPost()">Add post</button>
+    <button class="showPromoteButton" *ngIf="showPromoteButton" (click)="onPromote()">Promote to admin</button>
 </div>
 <app-pagination [posts] = "posts"></app-pagination>
