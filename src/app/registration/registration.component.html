@@ -1,23 +1,23 @@
 <div class="login-container">
-  <form #addUserForm = "ngForm" (ngSubmit) = "onAddUser(addUserForm)">
+  <form #addUserForm = "ngForm" (ngSubmit) = "onAddUser(addUserForm)" name="myForm">
     <h2>Registration</h2>
     <p>
       <label>Nickname</label></p>
-      <p><input #spy type="text" name="nickname" placeholder="Nickname" ngModel required>
+      <p><input type="text" name="nickname" id="nickname" placeholder="Nickname" ngModel  [(ngModel)]="nickname" (ngModelChange)="nicknameValidation()">
     </p>
     <p>
         <label>Email</label></p>
-        <p><input type="text" name="email" placeholder="Email" ngModel required>
+        <p><input type="email" name="email" id="email" placeholder="Email" ngModel [(ngModel)]="email" (ngModelChange)="emailValidation()">
     </p>
     <p>
       <label>Password</label></p>
-      <p><input type="password" name="password" placeholder="Password" [(ngModel)]="password" ngModel required>
+      <p><input type="password" name="password" id="password" placeholder="Password" ngModel [(ngModel)]="password" (ngModelChange)="passwordValidation()">
     </p>
+    <div class="prompt" *ngIf="!isPasswordStrong">The password must be at least 10 characters long, contain uppercase and lowercase characters of the Latin alphabet, numbers and special characters</div>
     <p>
       <label>Repeat password</label></p>
-      <p><input type="password" name="repeatPassword" id="repeatPassword" placeholder="Password" class="repeatPassword" [(ngModel)]="repeatPassword" (ngModelChange)="repeatPasswordChange()">
+      <p><input type="password" name="repeatPassword" id="repeatPassword" placeholder="Password" [(ngModel)]="repeatPassword" (ngModelChange)="passwordValidation()">
     </p>
-    <button type="submit" [disabled]="!addUserForm.form.valid">Sign up</button>
+    <button type="submit" id="submit" [disabled]="!formValid">Sign up</button>
   </form>
-  <!-- {{spy.className}} -->
 </div>
