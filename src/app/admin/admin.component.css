@@ -1,0 +1,10 @@
+.nickname {
+    color: #333333;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 19px;
+}
+
+.nickname:hover {
+    color: #548eaa;
+}

@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Post } from '../post';
@@ -16,6 +17,7 @@ export class PaginationComponent implements OnInit {
   public currentFirstPost: number = 0;
   public url: String = environment.frontUrl + "/post/";
   public formatDate: string[] = [];
+  public formatDatePage: string[] = [];
   public lastSelected;
   public offset = 0;
 
@@ -53,9 +55,7 @@ export class PaginationComponent implements OnInit {
         this.formatDate[i] = (day + "." + month + "." + date.getFullYear() + " " + hours + ":" + minutes);
       }
     }
-    this.lastSelected = (<HTMLInputElement>document.getElementsByTagName('button')[0]);
-    // console.log(this.lastSelected);
-    //this.lastSelected.setAttribute('class', 'selected-button');
+    this.formatDatePage = this.formatDate.slice(0, this.numberOfPosts);
   }
 
   ngAfterViewChecked(): void {
@@ -63,6 +63,13 @@ export class PaginationComponent implements OnInit {
       (<HTMLInputElement>document.getElementById('slider')).style.width = 40 * this.pages.length + 'px';
     if((<HTMLInputElement>document.getElementById('slider-line')) != null )
       (<HTMLInputElement>document.getElementById('slider-line')).style.width = 40 * this.pages.length + 'px';
+    if(this.lastSelected == undefined){
+      let tmp = (<HTMLInputElement>document.getElementById('slider-line'));
+      if(tmp != null){
+        this.lastSelected = tmp.firstChild;
+        this.lastSelected.setAttribute('class', 'selected-button');
+      }
+    }
   }
 
   public first(): void{
@@ -73,6 +80,10 @@ export class PaginationComponent implements OnInit {
       this.offset = 0;
       (<HTMLInputElement>document.getElementById('slider-line')).style.left = this.offset + 'px';
     }
+
+    this.lastSelected.setAttribute('class', '');
+    this.lastSelected = (<HTMLInputElement>document.getElementById('slider-line')).firstElementChild;
+    this.lastSelected.setAttribute('class', 'selected-button');
   }
 
   public prev(): void{
@@ -84,10 +95,14 @@ export class PaginationComponent implements OnInit {
     if(this.offset < 0 && this.currentFirstPost < 5 * (this.pages.length - 5))
       this.offset += 40;
     (<HTMLInputElement>document.getElementById('slider-line')).style.left = this.offset + 'px';
+
+    this.lastSelected.setAttribute('class', '');
+    if(this.lastSelected.previousElementSibling != null)
+      this.lastSelected = this.lastSelected.previousElementSibling;
+    this.lastSelected.setAttribute('class', 'selected-button');
   }
 
   public selectPage(pageNumber: number, event): void{
-    // console.log(this.lastSelected);
     this.lastSelected.setAttribute('class', '');
     event.target.setAttribute('class', 'selected-button');
     this.lastSelected = event.target;
@@ -97,7 +112,6 @@ export class PaginationComponent implements OnInit {
     if(this.pages.length > 9){
       if(pageNumber > 3){
         if(pageNumber < this.pages.length - 4){
-          console.log("pageNumber: " + pageNumber);
           this.offset = -40 * (pageNumber - 4);
         } else {
           this.offset = -40 * (this.pages.length - 9);
@@ -112,7 +126,6 @@ export class PaginationComponent implements OnInit {
   public next(): void{
     if(this.currentFirstPost < this.posts.length - this.numberOfPosts){
       this.currentFirstPost += this.numberOfPosts;
-      // console.log("currentFirstPost: " + this.currentFirstPost);
       this.changePage();
     }
 
@@ -120,6 +133,11 @@ export class PaginationComponent implements OnInit {
       this.offset -= 40;
     }
     (<HTMLInputElement>document.getElementById('slider-line')).style.left = this.offset + 'px';
+
+    this.lastSelected.setAttribute('class', '');
+    if(this.lastSelected.nextElementSibling != null)
+      this.lastSelected = this.lastSelected.nextElementSibling;
+    this.lastSelected.setAttribute('class', 'selected-button');
   }
 
   public last(): void{
@@ -134,10 +152,15 @@ export class PaginationComponent implements OnInit {
     this.offset = -40 * (this.pages.length - 9);
     (<HTMLInputElement>document.getElementById('slider-line')).style.left = this.offset + 'px';
     }
+
+    this.lastSelected.setAttribute('class', '');
+    this.lastSelected = (<HTMLInputElement>document.getElementById('slider-line')).lastElementChild;
+    this.lastSelected.setAttribute('class', 'selected-button');
   }
 
   public changePage(): void{
     this.page = this.posts.slice(this.currentFirstPost, this.currentFirstPost + this.numberOfPosts);
+    this.formatDatePage = this.formatDate.slice(this.currentFirstPost, this.currentFirstPost + this.numberOfPosts);
   }
 
 }

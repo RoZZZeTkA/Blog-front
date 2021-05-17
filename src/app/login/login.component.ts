@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { JwtClientService } from '../jwt-client.service';
-import { LoginService } from '../login.service';
 import { User } from '../user';
 import { AuthRequest } from '../authRequest';
 
@@ -12,8 +11,7 @@ import { AuthRequest } from '../authRequest';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService: LoginService, 
-              private jwtClientService: JwtClientService,
+  constructor(private jwtClientService: JwtClientService,
               private elementRef: ElementRef) { }
 
   ngOnInit(): void {

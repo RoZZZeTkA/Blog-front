@@ -13,17 +13,18 @@
 <p *ngFor="let value of splitValue" class="post-text">{{value}}</p>
 
 <div id="slider"  *ngIf = "showSlider">
-    <div class="prevButtton" (click)="prev()"></div>
-    <div class="nextButtton" (click)="next()"></div>
+    <div class="prevButtton" (click)="prev()">
+        <img class="button-image" src="https://rozzz-blog-storage.s3.eu-north-1.amazonaws.com/arrowL.png">
+    </div>
+    <div class="nextButtton" (click)="next()">
+        <img class="button-image" src="https://rozzz-blog-storage.s3.eu-north-1.amazonaws.com/arrow.png">
+    </div>
     <div id="slider-line">
         <div class="image-wrapper" *ngFor="let link of urls">
             <img src="{{link.url}}" (click) = "openImage(link.url)" class="mini-image">
         </div>
     </div>
 </div>
-<p *ngIf = "showSlider"><button (click) = "prev()">prev</button>
-    <button (click) = "next()">next</button>
-</p>
 
 <p>
     <button (click)="onAddMark(1)" class="mark-button">&#8593;</button>

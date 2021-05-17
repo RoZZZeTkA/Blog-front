@@ -1,6 +1,6 @@
 <div *ngFor="let post of page; let i = index" class="post-wrapper">
     <a href = {{url}}{{post.id}} class="post-title">{{post.title}}</a>
-    <div class="post-info">{{formatDate[i]}}</div>
+    <div class="post-info">{{formatDatePage[i]}}</div>
 </div>
 <div class="button-wrapper" *ngIf="posts.length != 0">
     <button (click) = "first()">first</button>

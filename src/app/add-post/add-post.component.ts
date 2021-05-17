@@ -24,8 +24,7 @@ export class AddPostComponent implements OnInit {
   }
 
   public onAddPost(addPostForm: NgForm): void{
-    let tags = (<HTMLInputElement>document.getElementById('tags')).value;
-    this.postService.addPost(addPostForm.value, tags, this.jwtClientService.getHeaders()).subscribe(
+    this.postService.addPost(addPostForm.value, (<HTMLInputElement>document.getElementById('tags')).value, this.jwtClientService.getHeaders()).subscribe(
       () => {
         let title = (<HTMLInputElement>document.getElementById('title')).value;
         
@@ -40,19 +39,9 @@ export class AddPostComponent implements OnInit {
             )
           }
         }
-
-        // let tags = (<HTMLInputElement>document.getElementById('tags')).value.split(", ");
-        // if(!(tags[0] == "")){
-        //   for(let i = 0; i < tags.length; i++){
-        //     console.log(tags[i]);
-        //     let formData = new FormData();
-        //     formData.append('tag', tags[i]);
-        //     formData.append('title', title);
-        //     this.tagService.addTag(formData, this.jwtClientService.getHeaders()).subscribe(
-        //       (data: Tag) => {console.log(data);}
-        //     )
-        //   }
-        // }
+        addPostForm.reset();
+        (<HTMLInputElement>document.getElementById('tags')).value = "";
+        (<HTMLInputElement>document.getElementById('files')).value = "";
       },
       (error: HttpErrorResponse) => {
         alert("Failed to add post");

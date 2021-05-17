@@ -13,7 +13,7 @@ import { UserService } from '../user.service';
 export class AdminComponent implements OnInit {
 
   public users!: User[];
-  public url: String = environment.frontUrl + "/user/";
+  public url: String = environment.frontUrl + "/admin/user/";
 
   constructor(private userService: UserService, private jwtClientService: JwtClientService) { }
 

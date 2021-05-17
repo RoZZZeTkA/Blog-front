@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, OnInit, Output } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { JwtClientService } from '../jwt-client.service';
 import { Post } from '../post';
@@ -16,10 +16,12 @@ export class HomeComponent implements OnInit {
   public posts: Post[] = [];
 
   constructor(private postService: PostService,
-              private jwtClientService: JwtClientService) { }
+              private jwtClientService: JwtClientService,
+              private elementRef: ElementRef) { }
 
   ngOnInit(): void {
     this.getPosts();
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#ffffff';
   }
 
   public getPosts(): void {

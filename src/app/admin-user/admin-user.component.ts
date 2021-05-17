@@ -16,9 +16,9 @@ import { UserService } from '../user.service';
 })
 export class AdminUserComponent implements OnInit {
 
-  public user!: User;
+  public user: User = {} as User;
   public id!: number;
-  public posts!: Post[];
+  public posts: Post[] = [];
   private subscription: Subscription;
   public url: String = environment.frontUrl + "/post/";
   public urlDelete: String = environment.apiBaseUrl + "/post/delete/";

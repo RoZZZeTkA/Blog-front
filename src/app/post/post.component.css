@@ -38,7 +38,7 @@
 
 .overlay{
     position: fixed;
-    z-index: 10;
+    z-index: 101;
     top: 0;
     left: 0;
     width: 100%;
@@ -109,37 +109,31 @@
     color: #6c787f;
 }
 
-.prevButtton {
-    background-color: rgba(137, 43, 226, 0);
+.prevButtton,
+.nextButtton {
+    background-color: rgba(0, 0, 0, 0.1);
+    opacity: 0;
     height: 658px;
     width: 200px;
     position: absolute;
     z-index: 100;
     text-align: center;
-}
-
-.prevButtton:hover {
-    background-color: rgba(137, 43, 226, 0.7);
-    height: 658px;
-    width: 200px;
-    position: absolute;
-    z-index: 100;
 }
 
 .nextButtton {
-    background-color: rgba(43, 226, 43, 0);
-    height: 658px;
-    width: 200px;
-    position: absolute;
-    z-index: 100;
-    text-align: center;
-    right: 90px;
+    margin-left: 970px;
 }
 
+.prevButtton:hover,
 .nextButtton:hover {
-    background-color: rgba(43, 226, 43, 0.7);
-    height: 658px;
-    width: 200px;
-    position: absolute;
-    z-index: 100;
+    opacity: 1;
+}
+
+.button-image {
+    height: 100px;
+    margin-top: 279px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

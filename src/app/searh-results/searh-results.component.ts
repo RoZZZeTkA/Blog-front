@@ -28,7 +28,6 @@ export class SearhResultsComponent implements OnInit {
   }
 
   public getPostsByTag(): void{
-    console.log("getPostsByTag")
     this.postService.getPostsByTag(this.router.url.substring(10, this.router.url.length), this.jwtClientService.getHeaders())
     .subscribe(data => this.posts = JSON.parse(data.toString()))
   }
