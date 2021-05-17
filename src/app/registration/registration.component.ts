@@ -32,7 +32,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   public onAddUser(addUserForm: NgForm): void {
-    console.log(addUserForm.value);
     this.userService.addUsers(addUserForm.value).subscribe(
       (data: User) => {
         console.log(data);

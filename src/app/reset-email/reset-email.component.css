@@ -30,9 +30,9 @@ button {
     width: 100%;
 }
 
-.reset-button {
-    margin-top: 16px;
-    background-color: #b75555;
+button:disabled {
+    background-color: #558db794;
+    cursor: default;
 }
 
 .login-container {

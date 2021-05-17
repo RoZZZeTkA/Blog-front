@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { JwtClientService } from '../jwt-client.service';
@@ -17,14 +17,13 @@ export class SearhResultsComponent implements OnInit {
 
   constructor(private postService: PostService, 
               private router: Router,
-              private jwtClientService: JwtClientService) {
-                // router.events.subscribe((data) => this.getPostsByTag());
+              private jwtClientService: JwtClientService,
+              private elementRef: ElementRef) {
                 router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((data) => this.getPostsByTag());
               }
 
   ngOnInit(): void {
-    //this.getPostsByTag();
-    // this.router.events.subscribe((data) => this.getPostsByTag());
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#ffffff';
   }
 
   public getPostsByTag(): void{

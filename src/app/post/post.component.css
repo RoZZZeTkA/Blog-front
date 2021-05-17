@@ -86,7 +86,8 @@
     text-decoration: none;
 }
 
-.mark-button {
+.mark-button,
+.selected-mark-button {
     background-color: #FFF;
     color: #6c787f;
     border: 1px solid #d5dddf;
@@ -95,13 +96,18 @@
     width: 40px;
 }
 
-.mark-button:hover {
+.mark-button:hover,
+.selected-mark-button:hover {
     background-color: #edf5f9;
     color: #4d80aa;
 }
 
 .mark-button:active {
     color: #4d80aa;
+    border: 2px solid #4d80aa;
+}
+
+.selected-mark-button{
     border: 2px solid #4d80aa;
 }
 

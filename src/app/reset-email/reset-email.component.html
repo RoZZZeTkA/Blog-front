@@ -1,0 +1,10 @@
+<div class="login-container">
+    <form>
+        <h2>Enter your email</h2>
+        <p>
+        <label>Email</label>
+        <input type="email" name="email" id="email" placeholder="Email" [(ngModel)]="email" (ngModelChange)="emailValidation()">
+        </p>
+        <button [disabled]="!emailValid" (click)="sendResetRequest()">Send</button>
+    </form>
+</div>

@@ -29,6 +29,14 @@ export class UserService {
     return this.http.get<User>(`${this.apiServerUrl}/user/promote/${userId}`, {headers, responseType: 'text' as 'json' });
   }
 
+  public sendResetRequest(formData: FormData, headers): Observable<string> {
+    return this.http.post<string>(`${this.apiServerUrl}/user/reset/email`, formData, {headers, responseType: 'text' as 'json' });
+  }
+
+  public resetPassword(formData: FormData, headers): Observable<string> {
+    return this.http.post<string>(`${this.apiServerUrl}/user/reset/password`, formData, {headers, responseType: 'text' as 'json' });
+  }
+
   public addUsers(user: User): Observable<User> {
     user.path = window.location.protocol + "//" + window.location.host;
     return this.http.post<User>(`${this.apiServerUrl}/user/add`, user);

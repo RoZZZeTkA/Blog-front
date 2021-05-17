@@ -7,7 +7,7 @@ import { PostService } from './post.service';
 import { UserService } from './user.service';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
 import { PostComponent } from './post/post.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -18,6 +18,8 @@ import { HomeComponent } from './home/home.component';
 import { SearhResultsComponent } from './searh-results/searh-results.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ActivationComponent } from './activation/activation.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ResetEmailComponent } from './reset-email/reset-email.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ActivationComponent } from './activation/activation.component';
     HomeComponent,
     SearhResultsComponent,
     PaginationComponent,
-    ActivationComponent
+    ActivationComponent,
+    ResetPasswordComponent,
+    ResetEmailComponent
   ],
   imports: [
     BrowserModule,

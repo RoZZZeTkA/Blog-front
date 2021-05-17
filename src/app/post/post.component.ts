@@ -51,42 +51,44 @@ export class PostComponent implements OnInit {
 
   public getPostById(): void {
     this.postService.getPostById(this.id, this.jwtClientService.getHeaders())
-    .subscribe((data: string) => {this.post = JSON.parse(data); 
-                                  this.userService.getUserById(this.post.userId, this.jwtClientService.getHeaders())
-                                  .subscribe((data: User) => this.user = JSON.parse(data.toString()));
-                                  let date = new Date(this.post.date);
-                                  let day = date.getDate().toString();
-                                  let month = date.getMonth().toString();
-                                  let hours = date.getHours().toString();
-                                  let minutes = date.getMinutes().toString();
-                                  if(date.getDate() < 10){
-                                    day = "0" + date.getDate();
-                                  }
-                                  if(date.getMonth() < 10){
-                                    month = "0" + (date.getMonth() + 1);
-                                  }
-                                  if(date.getHours() < 10){
-                                    hours = "0" + date.getHours();
-                                  }
-                                  if(date.getMinutes() < 10){
-                                    minutes = "0" + date.getMinutes();
-                                  }
-                                  this.formatDate = "";
-                                  this.formatDate += (day + "." + month + "." + date.getFullYear() + " " + hours + ":" + minutes);
-                                  for(let i = 0; i < this.post.value.split("\n").length; i++){
-                                    this.splitValue[i] = this.post.value.split("\n")[i];
-                                  }
-                                  this.calculateRating();
-                                  if(this.urls.length != 0)
-                                    (<HTMLInputElement>document.getElementById('slider-line')).style.width = this.imageWidth * this.urls.length + 'px';
-                                })
+    .subscribe((data: string) => {
+      this.post = JSON.parse(data); 
+      this.userService.getUserById(this.post.userId, this.jwtClientService.getHeaders())
+      .subscribe((data: User) => this.user = JSON.parse(data.toString()));
+      let date = new Date(this.post.date);
+      let day = date.getDate().toString();
+      let month = date.getMonth().toString();
+      let hours = date.getHours().toString();
+      let minutes = date.getMinutes().toString();
+      if(date.getDate() < 10){
+        day = "0" + date.getDate();
+      }
+      if(date.getMonth() < 10){
+        month = "0" + (date.getMonth() + 1);
+      }
+      if(date.getHours() < 10){
+        hours = "0" + date.getHours();
+      }
+      if(date.getMinutes() < 10){
+        minutes = "0" + date.getMinutes();
+      }
+      this.formatDate = "";
+      this.formatDate += (day + "." + month + "." + date.getFullYear() + " " + hours + ":" + minutes);
+      for(let i = 0; i < this.post.value.split("\n").length; i++){
+        this.splitValue[i] = this.post.value.split("\n")[i];
+      }
+      this.calculateRating();
+      if(this.urls.length != 0)
+        (<HTMLInputElement>document.getElementById('slider-line')).style.width = this.imageWidth * this.urls.length + 'px';
+    })
 
     this.storageService.getUrlsByPostId(this.id, this.jwtClientService.getHeaders())
-    .subscribe((data) => {this.urls = JSON.parse(data.toString());
-                                      if(this.urls.length != 0){ 
-                                        this.showSlider = true;
-                                      }
-                                    })
+    .subscribe((data) => {
+      this.urls = JSON.parse(data.toString());
+      if(this.urls.length != 0){ 
+        this.showSlider = true;
+      }
+    })
   }
 
   public prev(): void {
@@ -119,7 +121,7 @@ export class PostComponent implements OnInit {
     formData.append('postId', this.id.toString());
     formData.append('value', markValue.toString());
     this.markService.addMark(formData,  this.jwtClientService.getHeaders()).subscribe(
-      (data) => {console.log(data); this.getPostById(); this.calculateRating();},
+      (data) => {this.getPostById(); this.calculateRating();},
       (error: HttpErrorResponse) => {
         alert("Sign in to rate");
       }
@@ -129,8 +131,27 @@ export class PostComponent implements OnInit {
 
   public calculateRating(): void {
     this.rating = 0;
-    for(let i = 0; i < this.post.postMarks.length; i++){
-      this.rating += this.post.postMarks[i].value;
-    }
+    let userId;
+    this.userService.getCurrentUser(this.jwtClientService.getHeaders())
+    .subscribe((data: User) => {
+      data = JSON.parse(data.toString());
+      userId = data.id;
+      (<HTMLInputElement>document.getElementById('mark-wrapper')).firstElementChild?.setAttribute('class', 'mark-button');
+      (<HTMLInputElement>document.getElementById('mark-wrapper')).lastElementChild?.setAttribute('class', 'mark-button');
+      for(let i = 0; i < this.post.postMarks.length; i++){
+        if(this.post.postMarks[i].userId == userId){
+          if(this.post.postMarks[i].value == 1)
+            (<HTMLInputElement>document.getElementById('mark-wrapper')).firstElementChild?.setAttribute('class', 'selected-mark-button');
+          else
+            (<HTMLInputElement>document.getElementById('mark-wrapper')).lastElementChild?.setAttribute('class', 'selected-mark-button');
+        }
+        this.rating += this.post.postMarks[i].value;
+      }
+    },
+    (error) => {
+      for(let i = 0; i < this.post.postMarks.length; i++){
+        this.rating += this.post.postMarks[i].value;
+      }
+    });
   }
 }

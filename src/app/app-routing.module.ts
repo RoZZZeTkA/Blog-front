@@ -8,6 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { PostComponent } from './post/post.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ResetEmailComponent } from './reset-email/reset-email.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SearhResultsComponent } from './searh-results/searh-results.component';
 import { UserComponent } from './user/user.component';
 
@@ -21,7 +23,9 @@ const routes: Routes = [
   {path: 'admin/user/:id', component:AdminUserComponent},
   {path: '', component:HomeComponent},
   {path: 'search', component:SearhResultsComponent},
-  {path: 'activation/:activationCode', component:ActivationComponent}
+  {path: 'activation/:activationCode', component:ActivationComponent},
+  {path: 'reset/email', component:ResetEmailComponent},
+  {path: 'reset/code/:resetCode', component:ResetPasswordComponent}
 ];
 
 @NgModule({
