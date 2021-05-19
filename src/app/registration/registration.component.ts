@@ -56,7 +56,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   public emailValidation(): void {
-    let regEx = new RegExp("^([a-zA-Z0-9])+@([a-z])+\\.([a-z])+$");
+    let regEx = new RegExp("^[^.]([a-zA-Z0-9-_.])+[^.]@([a-z])+\\.([a-z])+$");
     if(regEx.test(this.email)){
       this.emailValid = true;
       (<HTMLInputElement>document.getElementById('email')).style.borderLeft = "5px solid #42A948";
